@@ -41,7 +41,7 @@ jobs:
           echo XBPS_CHROOT_CMD=uchroot >> etc/conf
           sudo -Eu builder ./xbps-src binary-bootstrap
 
-      - name: Build noctalia-qs
+      - name: Build Rushie Client
         run: sudo -Eu builder sh -c "cd void-packages && ./xbps-src pkg rclient"
 
       - name: Sign and index repo
