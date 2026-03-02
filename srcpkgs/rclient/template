@@ -1,6 +1,6 @@
 # Template file for 'rclient'
 pkgname=rclient
-version=2.2.1
+version=2.2.2
 revision=1
 archs="x86_64"
 short_desc="Yet another fork of TaterClient for DDNet"
@@ -8,7 +8,7 @@ maintainer="Rain Xelelo <rxelelo@outlook.com>"
 license="custom"
 homepage="https://rushie-client.ru/"
 distfiles="https://github.com/RushieClient/RushieClient-ddnet/releases/download/V${version}/RClient-ubuntu.tar.xz"
-checksum="09aab619a8be8e794a10d429572a9fdb3378e7e438d1693c6368d193b2cf18d3"
+checksum="f5151749db7b5b87c079d139ade95bd8cd77a6351374b4ced94642207e2cfb15"
 
 depends="freetype opusfile curl glew wavpack ffmpeg libnotify miniupnpc sqlite libmariadbclient vulkan-loader"
 
