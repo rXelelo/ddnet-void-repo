@@ -138,7 +138,9 @@ jobs:
           elif [ -n "${{ needs.update.outputs.updated_packages }}" ]; then
             echo "packages=${{ needs.update.outputs.updated_packages }}" >> $GITHUB_OUTPUT
           else
-            CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} \
+            # Use HEAD^ HEAD to only diff the single latest commit,
+            # avoiding false positives from older commits in the push range.
+            CHANGED=$(git diff --name-only HEAD^ HEAD \
               | grep '^srcpkgs/' \
               | cut -d'/' -f2 \
               | sort -u \
@@ -172,7 +174,7 @@ jobs:
             <string>Rain Xelelo</string>
           </dict>
           </plist>" > masterdir-x86_64/var/db/xbps/keys/f9:75:69:31:bd:ee:dd:5e:d7:48:97:7f:4b:f1:0f:72.plist
-          sudo -Eu builder xbps-install -r masterdir-x86_64 --repo=https://rxelelo.github.io/noctalia-void-repo -S jq curl noctalia-qs -y
+          sudo -Eu builder xbps-install -r masterdir-x86_64 -S jq curl -y
 
       - name: Build changed package
         run: |
@@ -200,7 +202,7 @@ jobs:
 
       - name: Merge with existing repo and clean old versions
         run: |
-          REPO_DIR="/__w/noctalia-void-repo/noctalia-void-repo/repo"
+          REPO_DIR="/__w/ddnet-void-repo/ddnet-void-repo/repo"
           mkdir -p $REPO_DIR
 
           # Fetch existing gh-pages packages
@@ -235,4 +237,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./repo
-          keep_files: false./repo
+          keep_files: false
